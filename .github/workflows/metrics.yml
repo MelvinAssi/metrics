@@ -2,27 +2,26 @@ name: GitHub Metrics
 
 on:
   schedule:
-    - cron: '0 0 * * 0' # Chaque dimanche à minuit
-  workflow_dispatch:     # Permet de lancer manuellement le workflow
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
 
 jobs:
   metrics:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Récupérer le code du repo
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Important pour avoir tout l'historique git
+          fetch-depth: 0
 
-      # 2️⃣ Lancer Metrics et générer le SVG
       - name: Generate GitHub Metrics
         uses: lowlighter/metrics@latest
         with:
-          output: commit                  # Commit automatique du SVG
-          committer_name: "GitHub Actions"
-          committer_email: "github-actions[bot]@users.noreply.github.com"
-          committer_token: ${{ secrets.GITHUB_TOKEN }}
-          svg_path: github-metrics.svg    # Chemin où Metrics sauvegarde le SVG
+          user: MelvinAssi
+          repo: metrics
+          token: ${{ secrets.METRICS_TOKEN }} # 🔑 Utiliser PAT
+          output_action: commit
+          committer_token: ${{ secrets.METRICS_TOKEN }}
+          filename: github-metrics.svg
           template: classic
