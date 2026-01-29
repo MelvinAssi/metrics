@@ -19,7 +19,6 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           user: MelvinAssi
-          repo: metrics
           token: ${{ secrets.METRICS_TOKEN }} # 🔑 Utiliser PAT
           output_action: commit
           committer_token: ${{ secrets.METRICS_TOKEN }}
